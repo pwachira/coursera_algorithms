@@ -1,5 +1,4 @@
-import edu.princeton.cs.algs4.StdRandom;
-import edu.princeton.cs.algs4.StdStats;
+
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 /**
@@ -15,28 +14,23 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
 
 
+    private static final byte OPEN_INDICATOR = 1;
     private int gridSize;
-    private int[] openSites;
-    private int[] sites1d;
-    private int[][] sites2D;
+    private byte[][] sites2D;
     private int virtualTop;
     private int virtualBottom;
     private  WeightedQuickUnionUF wquf;
-    private static final int openIndicator = 1;
-    //private static final int closedIndicator = 0;
+ 
 
     /*
      * Constructor - creates N-by-N grid, with all sites blocked
      */
     public Percolation(int N) {
 
-        sites2D = new int[N][N];
-      //  openSites = new int[N];
+        sites2D = new byte[N][N];
+
         gridSize = N;
-        /*
-         * for(int i=0; i<N; i ++){ for(int j=0; j<N; j++){ // sites2D[i][j] =
-         * closedIndicator; }
-         */
+
         wquf = new WeightedQuickUnionUF(N*N+2); 
         virtualTop = N * N;
         virtualBottom = N * N + 1;
@@ -54,12 +48,11 @@ public class Percolation {
      */
     private int map2Dto1D(int row, int column) {
         return gridSize * (row-1)  + (column-1);
-        // sites1d[index2d] = sites2d[row][column];
-        // return index2d;
+
     }
 
     private boolean isIndiceValid(int i, int j) {
-        if (i <= 0 || j <= 0 || i > gridSize || j >gridSize) {
+        if (i <= 0 || j <= 0 || i > gridSize || j > gridSize) {
             return false;
         }
         return true;
@@ -79,7 +72,7 @@ public class Percolation {
             throw new IndexOutOfBoundsException("Indices are out of bounds");
         }      
         int indicator = sites2D[i-1][j-1];
-        if (indicator == openIndicator) {
+        if (indicator == OPEN_INDICATOR) {
             return true;
         }
         return false;
@@ -92,7 +85,7 @@ public class Percolation {
             throw new IndexOutOfBoundsException("Indices are out of bounds");
         }
         if (!isOpen(i, j)) {
-            sites2D[i-1][j-1] = openIndicator;
+            sites2D[i-1][j-1] = OPEN_INDICATOR;
             int site1dvalue = map2Dto1D(i, j);
             int aboveX = i;
             int aboveY = j - 1;
@@ -115,24 +108,20 @@ public class Percolation {
         if (!isIndiceValid(i, j)) {
             throw new IndexOutOfBoundsException("Indices are out of bounds");
         }
-        if(wquf.connected(map2Dto1D(i, j), virtualTop) && isOpen(i, j) ){
+        if (wquf.connected(map2Dto1D(i, j), virtualTop) && isOpen(i, j)) {
             return true;
         } 
         return false;
        
     }
 
-    public boolean percolates() { // does the system percolate?
+    public boolean percolates() { 
 
         return wquf.connected(virtualBottom, virtualTop);
     }
 
     public static void main(String[] args) { // test client (optional)
-        /*Percolation testPerc1 = new Percolation(3);
-        testPerc1.open(1, 1);
-        testPerc1.open(1, 2);
-        wquf.connected(1, 2);
-        */
+
 
     }
 }
