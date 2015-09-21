@@ -13,7 +13,7 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
  *
  */
 public class Percolation {
-    //testing git
+
 
     private int gridSize;
     private int[] openSites;
@@ -37,16 +37,15 @@ public class Percolation {
          * for(int i=0; i<N; i ++){ for(int j=0; j<N; j++){ // sites2D[i][j] =
          * closedIndicator; }
          */
-        wquf = new WeightedQuickUnionUF(N*N +2);
+        wquf = new WeightedQuickUnionUF(N*N+2); 
         virtualTop = N * N;
         virtualBottom = N * N + 1;
 
-    // edited 12 18 am - dont create virtuals - just assume them   
-    /*  for (int i = 1; i <= N; i++) {
+     for (int i = 1; i <= N; i++) {
             wquf.union(virtualTop, map2Dto1D(1, i));
             wquf.union(virtualBottom, map2Dto1D(N, i));
         }
-      */  
+        
 
     }
 
@@ -116,7 +115,10 @@ public class Percolation {
         if (!isIndiceValid(i, j)) {
             throw new IndexOutOfBoundsException("Indices are out of bounds");
         }
-        return wquf.connected(map2Dto1D(i, j), virtualTop);
+        if(wquf.connected(map2Dto1D(i, j), virtualTop) && isOpen(i, j) ){
+            return true;
+        } 
+        return false;
        
     }
 
