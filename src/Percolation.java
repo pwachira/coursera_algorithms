@@ -44,7 +44,11 @@ public class Percolation {
     }
 
     /*
-     * This method maps a 2d array to a 1 d array using the row-major approach
+     * Maps a 2d array to a 1d array using the row-major approach
+     * 
+     * @param row the row number based on a 1- based index
+     * @param 
+     * @returns int
      */
     private int map2Dto1D(int row, int column) {
         return gridSize * (row-1)  + (column-1);
@@ -69,7 +73,7 @@ public class Percolation {
 
     public boolean isOpen(int i, int j) {
         if (!isIndiceValid(i, j)) {
-            throw new IndexOutOfBoundsException("Indices are out of bounds");
+            throw new IndexOutOfBoundsException(String.format("Indices are out of bounds i:%d j:%d",i,j));
         }      
         int indicator = sites2D[i-1][j-1];
         if (indicator == OPEN_INDICATOR) {
@@ -82,7 +86,7 @@ public class Percolation {
     public void open(int i, int j) {
 
         if (!isIndiceValid(i, j)) {
-            throw new IndexOutOfBoundsException("Indices are out of bounds");
+            throw new IndexOutOfBoundsException(String.format("Indices are out of bounds i:%d j:%d",i,j));
         }
         if (!isOpen(i, j)) {
             sites2D[i-1][j-1] = OPEN_INDICATOR;
@@ -120,8 +124,8 @@ public class Percolation {
         return wquf.connected(virtualBottom, virtualTop);
     }
 
-    public static void main(String[] args) { // test client (optional)
-
+    public static void main(String[] args) { 
+       
 
     }
 }
