@@ -28,9 +28,7 @@ public class Percolation {
     public Percolation(int N) {
 
         sites2D = new byte[N][N];
-
         gridSize = N;
-
         wquf = new WeightedQuickUnionUF(N*N+2); 
         virtualTop = N * N;
         virtualBottom = N * N + 1;
@@ -47,7 +45,7 @@ public class Percolation {
      * Maps a 2d array to a 1d array using the row-major approach
      * 
      * @param row the row number based on a 1- based index
-     * @param 
+     * @param column
      * @returns int
      */
     private int map2Dto1D(int row, int column) {
@@ -73,7 +71,7 @@ public class Percolation {
 
     public boolean isOpen(int i, int j) {
         if (!isIndiceValid(i, j)) {
-            throw new IndexOutOfBoundsException(String.format("Indices are out of bounds i:%d j:%d",i,j));
+            throw new IndexOutOfBoundsException("Indices are out of bounds: i="+i+"j = "+j);
         }      
         int indicator = sites2D[i-1][j-1];
         if (indicator == OPEN_INDICATOR) {
@@ -86,7 +84,7 @@ public class Percolation {
     public void open(int i, int j) {
 
         if (!isIndiceValid(i, j)) {
-            throw new IndexOutOfBoundsException(String.format("Indices are out of bounds i:%d j:%d",i,j));
+            throw new IndexOutOfBoundsException("Indices are out of bounds: i="+i+"j = "+j);
         }
         if (!isOpen(i, j)) {
             sites2D[i-1][j-1] = OPEN_INDICATOR;
@@ -110,7 +108,7 @@ public class Percolation {
 
     public boolean isFull(int i, int j) { // is site (row i, column j) full?
         if (!isIndiceValid(i, j)) {
-            throw new IndexOutOfBoundsException("Indices are out of bounds");
+            throw new IndexOutOfBoundsException("Indices are out of bounds: i="+i+"j = "+j);
         }
         if (wquf.connected(map2Dto1D(i, j), virtualTop) && isOpen(i, j)) {
             return true;
