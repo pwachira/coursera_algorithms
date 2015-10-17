@@ -28,13 +28,11 @@ public class Percolation {
     public Percolation(int N) {
 
         sites2D = new byte[N][N];
-<<<<<<< HEAD
-        gridSize = N;
-=======
+
 
         gridSize = N;
 
->>>>>>> 21f57961701a920a3cf77f8fca8f33059396a409
+
         wquf = new WeightedQuickUnionUF(N*N+2); 
         virtualTop = N * N;
         virtualBottom = N * N + 1;
@@ -51,11 +49,7 @@ public class Percolation {
      * Maps a 2d array to a 1d array using the row-major approach
      * 
      * @param row the row number based on a 1- based index
-<<<<<<< HEAD
      * @param column
-=======
-     * @param 
->>>>>>> 21f57961701a920a3cf77f8fca8f33059396a409
      * @returns int
      */
     private int map2Dto1D(int row, int column) {
@@ -81,11 +75,9 @@ public class Percolation {
 
     public boolean isOpen(int i, int j) {
         if (!isIndiceValid(i, j)) {
-<<<<<<< HEAD
-            throw new IndexOutOfBoundsException("Indices are out of bounds: i="+i+"j = "+j);
-=======
+
             throw new IndexOutOfBoundsException(String.format("Indices are out of bounds i:%d j:%d",i,j));
->>>>>>> 21f57961701a920a3cf77f8fca8f33059396a409
+
         }      
         int indicator = sites2D[i-1][j-1];
         if (indicator == OPEN_INDICATOR) {
@@ -98,11 +90,9 @@ public class Percolation {
     public void open(int i, int j) {
 
         if (!isIndiceValid(i, j)) {
-<<<<<<< HEAD
-            throw new IndexOutOfBoundsException("Indices are out of bounds: i="+i+"j = "+j);
-=======
+
             throw new IndexOutOfBoundsException(String.format("Indices are out of bounds i:%d j:%d",i,j));
->>>>>>> 21f57961701a920a3cf77f8fca8f33059396a409
+
         }
         if (!isOpen(i, j)) {
             sites2D[i-1][j-1] = OPEN_INDICATOR;
@@ -126,11 +116,8 @@ public class Percolation {
 
     public boolean isFull(int i, int j) { // is site (row i, column j) full?
         if (!isIndiceValid(i, j)) {
-<<<<<<< HEAD
             throw new IndexOutOfBoundsException("Indices are out of bounds: i="+i+"j = "+j);
-=======
-            throw new IndexOutOfBoundsException("Indices are out of bounds");
->>>>>>> 21f57961701a920a3cf77f8fca8f33059396a409
+
         }
         if (wquf.connected(map2Dto1D(i, j), virtualTop) && isOpen(i, j)) {
             return true;

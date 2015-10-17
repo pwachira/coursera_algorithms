@@ -37,13 +37,13 @@ public class Deque<Item> implements Iterable<Item> {
     /**
      * @return  boolean indicating if the deque is empty.
      */
-    public final boolean isEmpty() {
+    public  boolean isEmpty() {
         return first == null;
     }
     /**
      * @return  current size of the queue.
      */
-    public final int size() {
+    public  int size() {
         return queueSize;
 
     }
@@ -52,7 +52,7 @@ public class Deque<Item> implements Iterable<Item> {
      * Adds a new Item to the start of the queue.
      * @param item Item to be added
      */
-    public final void addFirst(final Item item) {
+    public  void addFirst(Item item) {
         if (item == null) {
             throw new NullPointerException("Item supplied is null");
             }
@@ -76,7 +76,7 @@ public class Deque<Item> implements Iterable<Item> {
      * Adds a new Item to the end of the queue.
      * @param item Item to be added
      */
-    public final void addLast(final Item item) {
+    public  void addLast(Item item) {
         if (item == null) {
             throw new NullPointerException("Item supplied is null");
             }
@@ -100,7 +100,7 @@ public class Deque<Item> implements Iterable<Item> {
      * Removes item from the start of the queue.
      * @return  Item removed
      */
-    public final Item removeFirst() {
+    public  Item removeFirst() {
         if (isEmpty()) {
             throw new UnsupportedOperationException(
                "Attempting to remove from an empty queue");
@@ -122,7 +122,7 @@ public class Deque<Item> implements Iterable<Item> {
      * Removes item from the end of the queue.
      * @return  Item removed
      */
-    public final Item removeLast() {
+    public  Item removeLast() {
         if (isEmpty()) {
             throw new UnsupportedOperationException(
                 "Attempting to remove from an empty queue");
@@ -150,15 +150,15 @@ public class Deque<Item> implements Iterable<Item> {
       /**
        * Implementation of iterator.
        */
-        Item item;
+        private Item item;
       /**
        * Implementation of iterator.
        */
-         Node next;
+         private Node next;
          /**
           * Implementation of iterator.
           */
-         Node prev;
+         private Node prev;
 
     }
     /**
@@ -195,7 +195,7 @@ public class Deque<Item> implements Iterable<Item> {
      * Iterator.
      * @return Iterator Iterator
      */
-    public final Iterator<Item> iterator() {
+    public  Iterator<Item> iterator() {
         // TODO Auto-generated method stub
         return new ItemIterator();
     }
@@ -203,7 +203,7 @@ public class Deque<Item> implements Iterable<Item> {
  * main method.
  * @param args String array input
  */
-    public static void main(final String[] args) {
+    public static void main(String[] args) {
         try {
             Deque<String> deck = new Deque<String>();
         deck.addFirst("One");
